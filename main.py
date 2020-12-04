@@ -4,25 +4,27 @@ import json
 import os
 from pathlib import Path
 
+
+def json_from_file(x):
+    a = list()
+    if '.json' in x[0]:
+        d = 'event_files'
+    elif '.schema' in x[0]:
+        d = 'schema_files'
+    for i in range(len(x)):
+        s = Path.cwd() / 'task_folder' / d / x[i]
+        with open(s, 'r', encoding='utf-8') as f:
+            message = json.load(f)
+        a.append(message)
+        f.close()
+    return a
+
+
 event_files = os.listdir(Path.cwd() / 'task_folder' / 'event_files')
 schema_files = os.listdir(Path.cwd() / 'task_folder' / 'schema_files')
 
-event_list = list()
-schema_list = list()
-
-for i in range(len(event_files)):
-    s = Path.cwd() / 'task_folder' / 'event_files' / event_files[i]
-    with open(s, 'r', encoding='utf-8') as f:
-        message = json.load(f)
-    event_list.append(message)
-    f.close()
-
-for i in range(len(schema_files)):
-    s = Path.cwd() / 'task_folder' / 'schema_files' / schema_files[i]
-    with open(s, 'r', encoding='utf-8') as f:
-        schema = json.load(f)
-    schema_list.append(schema)
-    f.close()
+event_list = json_from_file(event_files)
+schema_list = json_from_file(schema_files)
 
 with open(Path.cwd() / 'task_folder' / 'meta.schema', 'r', encoding='utf-8') as f:
     meta = json.load(f)
