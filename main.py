@@ -4,18 +4,6 @@ import json
 import os
 from pathlib import Path
 
-
-#def json_from_file(self, x):
- #   self.a = list()
-  #  for i in range(len(x)):
-   #     s = Path.cwd() / 'task_folder' / self.name / x[i]
-    #    with open(s, 'r', encoding='utf-8') as f:
-     #       message = json.load(f)
-      #  self.a.append(message)
-       # f.close()
-        #return self.a
-
-
 event_files = os.listdir(Path.cwd() / 'task_folder' / 'event_files')
 schema_files = os.listdir(Path.cwd() / 'task_folder' / 'schema_files')
 
